@@ -1,0 +1,18 @@
+package stellarburgers;
+
+import io.restassured.response.ValidatableResponse;
+import org.junit.Test;
+
+public class UserUpdateRequestValidationTes {
+    @Test
+    public void UserCanBeUpdatedWithValidParameters(){
+        User user=User.getRandomUser();
+        UserCredentials userCredentials=new UserCredentials(user.getEmail(),user.getPassword());
+        UserClient userClient=new UserClient();
+        User newUser=new User("testxxx@yandex.ru","12345e","iilya");
+        ValidatableResponse createResponse= userClient.create(user);
+        ValidatableResponse loginResponse=userClient.login(userCredentials);
+        String token=loginResponse.extract().jsonPath().getString("accessToken");
+        ValidatableResponse updateResponse=userClient.updateUser(newUser,token);
+    }
+}
