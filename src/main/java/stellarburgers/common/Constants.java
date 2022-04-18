@@ -1,4 +1,4 @@
-package common;
+package stellarburgers.common;
 
 public class Constants {
     //урл стенда

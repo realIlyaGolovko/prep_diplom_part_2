@@ -1,8 +1,8 @@
 package stellarburgers.user;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import common.CommonRestClient;
-import static common.Constants.*;
+import stellarburgers.common.CommonRestClient;
+import static stellarburgers.common.Constants.*;
 import static io.restassured.RestAssured.given;
 
 public class UserClient extends CommonRestClient {
