@@ -1,4 +1,4 @@
-package stellarburgers;
+package stellarburgers.user;
 
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
@@ -6,16 +6,16 @@ import stellarburgers.user.User;
 import stellarburgers.user.UserClient;
 import stellarburgers.user.UserCredentials;
 
-public class UserUpdateRequestValidationTes {
+import static org.apache.http.HttpStatus.SC_OK;
+
+public class UserLoginRequestValidationTest {
     @Test
-    public void UserCanBeUpdatedWithValidParameters(){
+    public void UserCanBeLoggedWithvalidParameters(){
         User user=User.getRandomUser();
         UserCredentials userCredentials=new UserCredentials(user.getEmail(),user.getPassword());
         UserClient userClient=new UserClient();
-        User newUser=new User("testxxx@yandex.ru","12345e","iilya");
         ValidatableResponse createResponse= userClient.create(user);
         ValidatableResponse loginResponse=userClient.login(userCredentials);
-        String token=loginResponse.extract().jsonPath().getString("accessToken");
-        ValidatableResponse updateResponse=userClient.updateUser(newUser,token);
+        loginResponse.assertThat().statusCode(SC_OK);
     }
 }

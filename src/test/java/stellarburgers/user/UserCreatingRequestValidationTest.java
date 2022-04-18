@@ -1,4 +1,4 @@
-package stellarburgers;
+package stellarburgers.user;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
