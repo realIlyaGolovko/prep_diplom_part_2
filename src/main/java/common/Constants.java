@@ -7,6 +7,6 @@ public class Constants {
     public static final String CREATE_USER_PATH="api/auth/register";
     //урл для авторизации
     public static final String LOGIN_USER_PATH ="api/auth/login";
-    //урл для изменения информации о пользователе
+    //урл для изменения информации  и удалении инфы о пользователе
     public static final String UPDATE_USER_PATH ="api/auth/user";
 }

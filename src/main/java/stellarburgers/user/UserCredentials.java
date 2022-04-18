@@ -1,4 +1,4 @@
-package stellarburgers;
+package stellarburgers.user;
 import lombok.Builder;
 import lombok.Data;
 

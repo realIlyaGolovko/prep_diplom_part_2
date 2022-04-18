@@ -1,6 +1,7 @@
-package stellarburgers;
+package stellarburgers.user;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import common.CommonRestClient;
 import static common.Constants.*;
 import static io.restassured.RestAssured.given;
 
@@ -23,14 +24,25 @@ public ValidatableResponse login(UserCredentials userCredentials){
             .post(LOGIN_USER_PATH)
             .then().log().all();
 }
-@Step("Запрос на изменение данных о пользователе с {user} и {accessToken}")
-public ValidatableResponse updateUser(User user,String accessToken){
+@Step("Запрос на изменение данных о пользователе с {user} и {token}")
+public ValidatableResponse updateUser(User user,String token){
     return given().log().all()
-            .header("Authorization",accessToken)
+            .header("Authorization",token)
             .spec(getBaseSpec())
             .body(user)
             .when()
             .patch(UPDATE_USER_PATH)
+            .then().log().all();
+}
+//Методом тыка нашел метод для удаления пользователя, в документации не обнаружил
+@Step("Запрос на удаление созданного пользователя")
+public ValidatableResponse deleteUser(User user,String token){
+    return given().log().all()
+            .header("Authorization",token)
+            .spec(getBaseSpec())
+            .body(user)
+            .when()
+            .delete(UPDATE_USER_PATH)
             .then().log().all();
 }
 }

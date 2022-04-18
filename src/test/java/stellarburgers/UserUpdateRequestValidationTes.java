@@ -2,6 +2,9 @@ package stellarburgers;
 
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
+import stellarburgers.user.User;
+import stellarburgers.user.UserClient;
+import stellarburgers.user.UserCredentials;
 
 public class UserUpdateRequestValidationTes {
     @Test

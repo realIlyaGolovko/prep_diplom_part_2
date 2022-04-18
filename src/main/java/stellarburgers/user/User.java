@@ -1,4 +1,4 @@
-package stellarburgers;
+package stellarburgers.user;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
