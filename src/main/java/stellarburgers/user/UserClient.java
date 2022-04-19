@@ -35,7 +35,7 @@ public ValidatableResponse updateUser(User user,String token){
             .then().log().all();
 }
 //Методом тыка нашел метод для удаления пользователя, в документации не обнаружил
-@Step("Запрос на удаление созданного пользователя")
+@Step("Запрос на удаление созданного пользователя {user} и {token}")
 public ValidatableResponse deleteUser(User user,String token){
     return given().log().all()
             .header("Authorization",token)
@@ -45,4 +45,7 @@ public ValidatableResponse deleteUser(User user,String token){
             .delete(UPDATE_USER_PATH)
             .then().log().all();
 }
+    public String getAccessToken(ValidatableResponse validatableResponse){
+        return validatableResponse.extract().jsonPath().getString("accessToken");
+    }
 }

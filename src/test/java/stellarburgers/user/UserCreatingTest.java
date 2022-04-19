@@ -22,16 +22,16 @@ public class UserCreatingTest {
     }
     @After
     public void tearDown(){
-        ValidatableResponse deleteResponse=userClient.deleteUser(user,token);
+        userClient.deleteUser(user,token);
     }
     @Test
     @DisplayName("Проверка создания уникального пользователя")
     public void UserСanBeCreatedWithValidParameters(){
-        ValidatableResponse createResponse= userClient.create(user);
-        String actualResult=createResponse.extract().jsonPath().getString("success");
-        token=createResponse.extract().jsonPath().getString("accessToken");
+        ValidatableResponse validatableResponse= userClient.create(user);
+        String actualResult=validatableResponse.extract().jsonPath().getString("success");
+        token= userClient.getAccessToken(validatableResponse);
         //Assert
-        createResponse.assertThat().statusCode(SC_OK);
+        validatableResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals("Incorrect creation status ",expectedResult,actualResult);
 
     }
