@@ -18,21 +18,27 @@ public class UserCreatingTest {
     public void setUp(){
         userClient=new UserClient();
     }
+
     @After
     public void tearDown(){
         userClient.deleteUser(user,token);
     }
+
     @Test
     @DisplayName("Проверка создания уникального пользователя")
     public void UserСanBeCreatedWithValidParameters(){
         //выполнили запрос
-        ValidatableResponse validatableResponse= userClient.create(user);
-        String actualResult=validatableResponse.extract().jsonPath().getString("success");
-        token= userClient.getAccessToken(validatableResponse);
-        //Assert
-        validatableResponse.assertThat().statusCode(SC_OK);
-        Assert.assertEquals("Incorrect creation status ",SUCCESS_MSG_TRUE,actualResult);
-
+        ValidatableResponse createResponse= userClient.create(user);
+        //взяли нужны данные
+        String actualSuccess=userClient.getPath(createResponse,"success");
+        String actualEmail=userClient.getPath(createResponse,"user.email");
+        String actualName=userClient.getPath(createResponse,"user.name");
+        token= userClient.getPath(createResponse,"accessToken");
+        //Asserts
+        createResponse.assertThat().statusCode(SC_OK);
+        Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_TRUE,actualSuccess);
+        Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
+        Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
 
 }
