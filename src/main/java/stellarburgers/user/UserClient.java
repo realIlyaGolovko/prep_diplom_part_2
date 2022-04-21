@@ -24,7 +24,7 @@ public ValidatableResponse login(UserCredentials userCredentials){
             .post(LOGIN_USER_PATH)
             .then().log().all();
 }
-@Step("Запрос на изменение данных о пользователе с {user} и {token}")
+@Step("Запрос на изменение данных о пользователе с {user}")
 public ValidatableResponse updateUser(User user,String token){
     return given().log().all()
             .header("Authorization",token)
@@ -35,7 +35,7 @@ public ValidatableResponse updateUser(User user,String token){
             .then().log().all();
 }
 //Методом тыка нашел метод для удаления пользователя, в документации не обнаружил
-@Step("Запрос на удаление созданного пользователя {user} и {token}")
+@Step("Запрос на удаление созданного пользователя {user}")
 public ValidatableResponse deleteUser(User user,String token){
     return given().log().all()
             .header("Authorization",token)

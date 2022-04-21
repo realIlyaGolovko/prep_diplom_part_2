@@ -1,4 +1,5 @@
 package stellarburgers.user;
+import io.qameta.allure.Allure;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Assert;
@@ -39,11 +40,15 @@ public UserCreatingRequestValidationTest(User user){
 @DisplayName("Проверка невозможности создания пользователя без одного из обязательных полей")
 public void userCannotBeCreatedWithIncompleteData(){
     ValidatableResponse createResponse= userclient.create(user);
-    String expectSuccessMsg=userclient.getPath(createResponse,"success");
-    String expectMsg=userclient.getPath(createResponse,"message");
+    String actualSuccessMsg=userclient.getPath(createResponse,"success");
+    String actualErrorMsg=userclient.getPath(createResponse,"message");
     //Asserts
     createResponse.statusCode(SC_FORBIDDEN);
-    Assert.assertEquals("Incorrect success status",expectSuccessMsg,SUCCESS_MSG_FALSE);
-    Assert.assertEquals("Incorrect message",expectMsg,CREATE_USER_ERROR_MSG);
+    Assert.assertEquals("Incorrect success status",actualSuccessMsg,SUCCESS_MSG_FALSE);
+    Assert.assertEquals("Incorrect message",actualErrorMsg,CREATE_USER_ERROR_MSG);
+    //Данные для отчета
+    Allure.addAttachment("Данные клиента", String.valueOf(user));
+    Allure.addAttachment("Статус ответа",actualSuccessMsg);
+    Allure.addAttachment("Сообщение об ошибке",actualErrorMsg);
 }
 }
