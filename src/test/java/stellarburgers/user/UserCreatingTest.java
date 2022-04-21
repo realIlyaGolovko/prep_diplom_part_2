@@ -34,9 +34,9 @@ public class UserCreatingTest {
         String actualEmail=userClient.getPath(createResponse,"user.email");
         String actualName=userClient.getPath(createResponse,"user.name");
         token= userClient.getPath(createResponse,"accessToken");
-        //Asserts
+        //проверки
         createResponse.assertThat().statusCode(SC_OK);
-        Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_TRUE,actualSuccess);
+        Assert.assertEquals("Incorrect creation message",SUCCESS_MSG_TRUE,actualSuccess);
         Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
         Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
