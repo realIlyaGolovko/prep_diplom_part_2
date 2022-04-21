@@ -3,21 +3,14 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
 public class UserCreatingTest {
-
-    User user=User.getRandomUser();
-    UserClient userClient;
-    String token;
-
-    @Before
-    public void setUp(){
-        userClient=new UserClient();
-    }
+    private static final User user=User.getRandomUser();
+    private static final UserClient userClient=new UserClient();
+    private String token;
 
     @After
     public void tearDown(){
@@ -34,9 +27,9 @@ public class UserCreatingTest {
         String actualEmail=userClient.getPath(createResponse,"user.email");
         String actualName=userClient.getPath(createResponse,"user.name");
         token= userClient.getPath(createResponse,"accessToken");
-        //проверки
+        //Asserts
         createResponse.assertThat().statusCode(SC_OK);
-        Assert.assertEquals("Incorrect creation message",SUCCESS_MSG_TRUE,actualSuccess);
+        Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_TRUE,actualSuccess);
         Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
         Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
