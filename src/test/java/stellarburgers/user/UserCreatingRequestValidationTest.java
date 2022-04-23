@@ -17,6 +17,7 @@ public class UserCreatingRequestValidationTest extends CommonTest {
 public UserCreatingRequestValidationTest(User user){
     this.user=user;
 }
+//создаем тестовые данные
 @Parameterized.Parameters
     public static Object[][] getUserData(){
     return new Object[][]{
@@ -38,7 +39,9 @@ public UserCreatingRequestValidationTest(User user){
 @Test
 @DisplayName("Проверка невозможности создания пользователя без одного из обязательных полей")
 public void userCannotBeCreatedWithIncompleteData(){
+    // выполнили запрос на создание пользователя
     ValidatableResponse createResponse= userClient.create(user);
+    //взяли нужные данные
     String actualSuccessMsg=userClient.getPath(createResponse,"success");
     String actualErrorMsg=userClient.getPath(createResponse,"message");
     //Asserts

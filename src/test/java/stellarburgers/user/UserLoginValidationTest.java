@@ -12,22 +12,25 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.*;
 
 public class UserLoginValidationTest extends CommonTest {
-    private  UserCredentials userCredentials;
-    private static String token;
     @Before
+    //выполнили запрос на создание клиента
     public  void UserCreating() {
         ValidatableResponse createResponse = userClient.create(user);
         token = userClient.getPath(createResponse, "accessToken");
     }
     @After
+    //почистили данные после
     public void TearDown(){
         userClient.deleteUser(user,token);
     }
     @Test
     @DisplayName("Проверка валдиации при авторизации под клиентом с неверным логином и паролем")
     public void UserCannotBeLoginWithInvalidParameters(){
+        //создаем невалидные данные по клиенту
         userCredentials=new UserCredentials(user.getEmail()+"q",user.getPassword()+"w");
+        //выполняем запрос на авторизацию
         ValidatableResponse loginResponse=userClient.login(userCredentials);
+        //берем нужные данные
         String actualMsgSuccess=userClient.getPath(loginResponse,"success");
         String actualErrorMsg=userClient.getPath(loginResponse,"message");
         //Asserts

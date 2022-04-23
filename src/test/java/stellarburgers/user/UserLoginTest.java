@@ -11,9 +11,9 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
 public class UserLoginTest extends CommonTest {
- private static final UserCredentials userCredentials =UserCredentials.from(user);
- private static String token;
+private static final UserCredentials userCredentials =UserCredentials.from(user);
  @Before
+ //создаем
  public  void UserCreating() {
      ValidatableResponse createResponse = userClient.create(user);
      token = userClient.getPath(createResponse, "accessToken");

@@ -9,8 +9,6 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
 public class UserCreatingTest extends CommonTest {
-    private String token;
-
     @After
     //удалили тестовые данные
     public void tearDown(){
