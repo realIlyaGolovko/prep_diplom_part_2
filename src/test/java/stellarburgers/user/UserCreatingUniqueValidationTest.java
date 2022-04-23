@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
-import static stellarburgers.common.ConstantsForTests.CREATE_USER_UNIQUE_MSG;
+import static stellarburgers.common.ConstantsForTests.CREATE_USER_UNIQUE_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
 public class UserCreatingUniqueValidationTest {
@@ -35,7 +35,7 @@ String actualMsg=userclient.getPath(validatableResponse,"message");
 //Asserts
 validatableResponse.assertThat().statusCode(SC_FORBIDDEN);
 Assert.assertEquals(SUCCESS_MSG_FALSE,actualSuccessMsg);
-Assert.assertEquals(CREATE_USER_UNIQUE_MSG,actualMsg);
+Assert.assertEquals(CREATE_USER_UNIQUE_ERROR_MSG,actualMsg);
 }
 
 }
