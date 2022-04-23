@@ -12,10 +12,10 @@ public class UserUpdateRequestValidationTes {
         User user=User.getRandomUser();
         UserCredentials userCredentials=new UserCredentials(user.getEmail(),user.getPassword());
         UserClient userClient=new UserClient();
-        User newUser=new User("testxxx@yandex.ru","12345e","iilya");
+        User newUser=new User("testxl@yacndex.ru","12345e","iilya");
         ValidatableResponse createResponse= userClient.create(user);
         ValidatableResponse loginResponse=userClient.login(userCredentials);
         String token=loginResponse.extract().jsonPath().getString("accessToken");
-        ValidatableResponse updateResponse=userClient.updateUser(newUser,token);
+        ValidatableResponse updateResponse=userClient.updateUser(newUser,"");
     }
 }

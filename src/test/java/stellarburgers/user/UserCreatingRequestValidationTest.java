@@ -43,9 +43,9 @@ public void userCannotBeCreatedWithIncompleteData(){
     String actualSuccessMsg=userclient.getPath(createResponse,"success");
     String actualErrorMsg=userclient.getPath(createResponse,"message");
     //Asserts
-    createResponse.statusCode(SC_FORBIDDEN);
-    Assert.assertEquals("Incorrect success status",actualSuccessMsg,SUCCESS_MSG_FALSE);
-    Assert.assertEquals("Incorrect message",actualErrorMsg,CREATE_USER_ERROR_MSG);
+    createResponse.assertThat().statusCode(SC_FORBIDDEN);
+    Assert.assertEquals("Incorrect success status",SUCCESS_MSG_FALSE,actualSuccessMsg);
+    Assert.assertEquals("Incorrect message",CREATE_USER_ERROR_MSG,actualErrorMsg);
     //Данные для отчета
     Allure.addAttachment("Данные клиента", String.valueOf(user));
     Allure.addAttachment("Статус ответа",actualSuccessMsg);

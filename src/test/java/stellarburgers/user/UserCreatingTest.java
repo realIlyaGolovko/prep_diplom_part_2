@@ -13,6 +13,7 @@ public class UserCreatingTest {
     private String token;
 
     @After
+    //удалили тестовые данные
     public void tearDown(){
         userClient.deleteUser(user,token);
     }
@@ -23,13 +24,13 @@ public class UserCreatingTest {
         //выполнили запрос
         ValidatableResponse createResponse= userClient.create(user);
         //взяли нужны данные
-        String actualSuccess=userClient.getPath(createResponse,"success");
+        String actualMsgSuccess=userClient.getPath(createResponse,"success");
         String actualEmail=userClient.getPath(createResponse,"user.email");
         String actualName=userClient.getPath(createResponse,"user.name");
         token= userClient.getPath(createResponse,"accessToken");
         //Asserts
         createResponse.assertThat().statusCode(SC_OK);
-        Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_TRUE,actualSuccess);
+        Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_TRUE,actualMsgSuccess);
         Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
         Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
