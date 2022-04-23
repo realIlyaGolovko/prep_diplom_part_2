@@ -7,22 +7,26 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import stellarburgers.common.CommonTest;
-
+import stellarburgers.common.SetUp;
+import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.*;
 
-public class UserLoginValidationTest extends CommonTest {
+public class UserLoginValidationTest extends CommonTest implements SetUp, TearDown {
+    @Override
     @Before
-    //выполнили запрос на создание клиента
-    public  void UserCreating() {
+    public void CreateUser() {
+        //выполнили запрос на создание клиента
         ValidatableResponse createResponse = userClient.create(user);
         token = userClient.getPath(createResponse, "accessToken");
     }
+
+    @Override
     @After
-    //почистили данные после
-    public void TearDown(){
-        userClient.deleteUser(user,token);
-    }
+    public void deleteUser() {
+        //почистили данные после
+            userClient.deleteUser(user,token);}
+
     @Test
     @DisplayName("Проверка валдиации при авторизации под клиентом с неверным логином и паролем")
     public void UserCannotBeLoginWithInvalidParameters(){
@@ -38,5 +42,6 @@ public class UserLoginValidationTest extends CommonTest {
         Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_FALSE,actualMsgSuccess);
         Assert.assertEquals("Incorrect message",LOGIN_USER_ERROR_MSG,actualErrorMsg);
     }
+
 
 }

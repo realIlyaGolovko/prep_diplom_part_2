@@ -5,16 +5,16 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import stellarburgers.common.CommonTest;
+import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserCreatingTest extends CommonTest {
+public class UserCreatingTest extends CommonTest implements TearDown {
+    @Override
     @After
-    //удалили тестовые данные
-    public void tearDown(){
+    public void deleteUser() {
         userClient.deleteUser(user,token);
     }
-
     @Test
     @DisplayName("Проверка создания уникального пользователя")
     public void UserСanBeCreatedWithValidParameters(){
@@ -31,5 +31,4 @@ public class UserCreatingTest extends CommonTest {
         Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
         Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
-
 }

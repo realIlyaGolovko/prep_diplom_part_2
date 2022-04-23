@@ -6,22 +6,30 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import stellarburgers.common.CommonTest;
+import stellarburgers.common.SetUp;
+import stellarburgers.common.TearDown;
+
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static stellarburgers.common.ConstantsForTests.CREATE_USER_UNIQUE_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
-public class UserCreatingUniqueValidationTest extends CommonTest {
-@Before
-//Создали нового уникального пользователя
-    public void UserCreating(){
-    ValidatableResponse createResponse=userClient.create(user);
-    token=userClient.getPath(createResponse,"accessToken");
-}
-@After
-//удалили тестовые данные
-    public void TearDown(){
-    userClient.deleteUser(user,token);
-}
+public class UserCreatingUniqueValidationTest extends CommonTest implements SetUp, TearDown {
+
+    @Override
+    @Before
+    public void CreateUser() {
+        //Создали нового уникального пользователя
+        ValidatableResponse createResponse=userClient.create(user);
+        token=userClient.getPath(createResponse,"accessToken");
+    }
+
+    @Override
+    @After
+    public void deleteUser() {
+        //удалили тестовые данные
+        userClient.deleteUser(user,token);
+    }
+
 @Test
 @DisplayName("Проверка невозможности создать пользователя, который уже зарегистрирован")
     public void NotUniqueUserCannotBeCreated(){
