@@ -4,12 +4,11 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserCreatingTest {
-    private static final User user=User.getRandomUser();
-    private static final UserClient userClient=new UserClient();
+public class UserCreatingTest extends CommonTest {
     private String token;
 
     @After

@@ -6,13 +6,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserLoginTest {
-private static final User user =User.getRandomUser();
+public class UserLoginTest extends CommonTest {
  private static final UserCredentials userCredentials =UserCredentials.from(user);
- private static final UserClient userClient=new UserClient();
  private static String token;
  @Before
  public  void UserCreating() {

@@ -6,13 +6,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
+
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.*;
 
-public class UserLoginValidationTest {
-    private static final User user =User.getRandomUser();
+public class UserLoginValidationTest extends CommonTest {
     private  UserCredentials userCredentials;
-    private static final UserClient userClient=new UserClient();
     private static String token;
     @Before
     public  void UserCreating() {
