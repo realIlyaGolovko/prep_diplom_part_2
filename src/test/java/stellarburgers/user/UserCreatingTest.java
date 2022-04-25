@@ -4,20 +4,17 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
+import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserCreatingTest {
-    private static final User user=User.getRandomUser();
-    private static final UserClient userClient=new UserClient();
-    private String token;
-
+public class UserCreatingTest extends CommonTest implements TearDown {
+    @Override
     @After
-    //удалили тестовые данные
-    public void tearDown(){
+    public void deleteUser() {
         userClient.deleteUser(user,token);
     }
-
     @Test
     @DisplayName("Проверка создания уникального пользователя")
     public void UserСanBeCreatedWithValidParameters(){
@@ -34,5 +31,4 @@ public class UserCreatingTest {
         Assert.assertEquals("Incorrect email",user.getEmail(),actualEmail);
         Assert.assertEquals("Incorrect name",user.getName(),actualName);
     }
-
 }

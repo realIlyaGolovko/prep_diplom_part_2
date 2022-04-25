@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 @Builder
+//не указывал геттеры и сеттеры, т.к. использовал ломбок
 public class UserCredentials {
     private String email;
     private String password;

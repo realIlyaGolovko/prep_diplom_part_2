@@ -6,18 +6,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import stellarburgers.common.CommonTest;
+
 import  static  org.apache.http.HttpStatus.*;
 import static stellarburgers.common.ConstantsForTests.CREATE_USER_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
 @RunWith(Parameterized.class)
-public class UserCreatingRequestValidationTest {
-private static final UserClient userclient=new UserClient();
-private static User user=User.getRandomUser();
-
+public class UserCreatingRequestValidationTest extends CommonTest {
 public UserCreatingRequestValidationTest(User user){
     this.user=user;
 }
+//создаем тестовые данные
 @Parameterized.Parameters
     public static Object[][] getUserData(){
     return new Object[][]{
@@ -39,9 +39,11 @@ public UserCreatingRequestValidationTest(User user){
 @Test
 @DisplayName("Проверка невозможности создания пользователя без одного из обязательных полей")
 public void userCannotBeCreatedWithIncompleteData(){
-    ValidatableResponse createResponse= userclient.create(user);
-    String actualSuccessMsg=userclient.getPath(createResponse,"success");
-    String actualErrorMsg=userclient.getPath(createResponse,"message");
+    // выполнили запрос на создание пользователя
+    ValidatableResponse createResponse= userClient.create(user);
+    //взяли нужные данные
+    String actualSuccessMsg=userClient.getPath(createResponse,"success");
+    String actualErrorMsg=userClient.getPath(createResponse,"message");
     //Asserts
     createResponse.assertThat().statusCode(SC_FORBIDDEN);
     Assert.assertEquals("Incorrect success status",SUCCESS_MSG_FALSE,actualSuccessMsg);

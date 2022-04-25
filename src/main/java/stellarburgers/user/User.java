@@ -8,6 +8,7 @@ import lombok.Data;
 import java.util.Locale;
 @Data
 @Builder
+//не указывал геттеры и сеттеры, т.к. использовал ломбок
 public class User {
     private String email;
     private String password;

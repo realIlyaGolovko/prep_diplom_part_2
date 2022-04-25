@@ -6,28 +6,35 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
+import stellarburgers.common.SetUp;
+import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.*;
 
-public class UserLoginValidationTest {
-    private static final User user =User.getRandomUser();
-    private  UserCredentials userCredentials;
-    private static final UserClient userClient=new UserClient();
-    private static String token;
+public class UserLoginValidationTest extends CommonTest implements SetUp, TearDown {
+    @Override
     @Before
-    public  void UserCreating() {
+    public void CreateUser() {
+        //выполнили запрос на создание клиента
         ValidatableResponse createResponse = userClient.create(user);
         token = userClient.getPath(createResponse, "accessToken");
     }
+
+    @Override
     @After
-    public void TearDown(){
-        userClient.deleteUser(user,token);
-    }
+    public void deleteUser() {
+        //почистили данные после
+            userClient.deleteUser(user,token);}
+
     @Test
     @DisplayName("Проверка валдиации при авторизации под клиентом с неверным логином и паролем")
     public void UserCannotBeLoginWithInvalidParameters(){
+        //создаем невалидные данные по клиенту
         userCredentials=new UserCredentials(user.getEmail()+"q",user.getPassword()+"w");
+        //выполняем запрос на авторизацию
         ValidatableResponse loginResponse=userClient.login(userCredentials);
+        //берем нужные данные
         String actualMsgSuccess=userClient.getPath(loginResponse,"success");
         String actualErrorMsg=userClient.getPath(loginResponse,"message");
         //Asserts
@@ -35,5 +42,6 @@ public class UserLoginValidationTest {
         Assert.assertEquals("Incorrect creation message ",SUCCESS_MSG_FALSE,actualMsgSuccess);
         Assert.assertEquals("Incorrect message",LOGIN_USER_ERROR_MSG,actualErrorMsg);
     }
+
 
 }

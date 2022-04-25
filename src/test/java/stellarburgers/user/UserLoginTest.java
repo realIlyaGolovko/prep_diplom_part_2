@@ -6,27 +6,36 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import stellarburgers.common.CommonTest;
+import stellarburgers.common.SetUp;
+import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserLoginTest {
-private static final User user =User.getRandomUser();
- private static final UserCredentials userCredentials =UserCredentials.from(user);
- private static final UserClient userClient=new UserClient();
- private static String token;
- @Before
- public  void UserCreating() {
-     ValidatableResponse createResponse = userClient.create(user);
-     token = userClient.getPath(createResponse, "accessToken");
- }
-@After
-public void TearDown(){
-     userClient.deleteUser(user,token);
-}
+public class UserLoginTest extends CommonTest implements SetUp, TearDown {
+
+    @Override
+    @Before
+    public void CreateUser() {
+// выполнили запрос на создание клиента
+        ValidatableResponse createResponse = userClient.create(user);
+        token = userClient.getPath(createResponse, "accessToken");
+        userCredentials =UserCredentials.from(user);
+    }
+
+    @Override
+    @After
+//удалили тестовые данные
+    public void deleteUser() {
+        userClient.deleteUser(user,token);
+    }
+
 @Test
 @DisplayName("Проверка авторизации под созданным клиентом")
     public void UserCanBeLoginWithValidParameters(){
+//выполнили запрос на авторизацию
 ValidatableResponse loginResponse=userClient.login(userCredentials);
+//берем нужные данные
     String actualMsgSuccess=userClient.getPath(loginResponse,"success");
     String actualEmail=userClient.getPath(loginResponse,"user.email");
     String actualName=userClient.getPath(loginResponse,"user.name");
@@ -36,4 +45,5 @@ ValidatableResponse loginResponse=userClient.login(userCredentials);
     Assert.assertEquals("Incorrect email", user.getEmail(),actualEmail);
     Assert.assertEquals("Incorrect name", user.getName(),actualName);
     }
+
 }
