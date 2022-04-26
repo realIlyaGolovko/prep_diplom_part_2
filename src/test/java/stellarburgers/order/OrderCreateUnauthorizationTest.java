@@ -1,6 +1,5 @@
 package stellarburgers.order;
 
-
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -15,7 +14,7 @@ import stellarburgers.user.UserCredentials;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, TearDown {
+public class OrderCreateUnauthorizationTest extends CommonTest implements SetUp, TearDown {
     private static final OrderClient orderClient = new OrderClient();
     private static final Order order = Order.getRandomOrder();
 
@@ -37,23 +36,16 @@ public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, T
     public void deleteUser() {
         userClient.deleteUser(user, token);
     }
-
     @Test
-    @DisplayName("Проверка возможности создания заказа авторизованным пользователем")
-    public void OrderСanBeCreatedWithValidParametersAndAuthorization() {
+    @DisplayName("Проверка возможности создания заказа неавторизованным пользователем")
+    public void OrderСanBeCreatedWithValidParametersAndWithoutAuthorization() {
         //выполнили запрос на создание заказа
-        ValidatableResponse createOrderResponse = orderClient.createOrder(order, token);
+        ValidatableResponse createOrderResponse = orderClient.createOrder(order, "");
         //взяли нужные тестовые данные
         String actualSuccessMsg = getPath(createOrderResponse, "success");
-        String actualStatus = getPath(createOrderResponse, "order.status");
-        String actualName = getPath(createOrderResponse, "order.owner.name");
-        String actualEmail = getPath(createOrderResponse, "order.owner.email");
+
         //Asserts
         createOrderResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals(SUCCESS_MSG_TRUE, actualSuccessMsg);
-        Assert.assertEquals("done", actualStatus);
-        Assert.assertEquals(user.getName(), actualName);
-        Assert.assertEquals(user.getEmail(), actualEmail);
     }
 }
-
