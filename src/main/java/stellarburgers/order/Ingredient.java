@@ -3,6 +3,7 @@ package stellarburgers.order;
 import lombok.Data;
 
 @Data
+//Вспомогательный класс ддя парсинга ингредиентов
 public class Ingredient {
            private String _id;
            private String name;
