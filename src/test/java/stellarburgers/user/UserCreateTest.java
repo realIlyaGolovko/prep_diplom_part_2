@@ -11,7 +11,7 @@ import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class UserCreatingTest extends CommonTest implements TearDown {
+public class UserCreateTest extends CommonTest implements TearDown {
     @Override
     @After
     public void deleteUser() {

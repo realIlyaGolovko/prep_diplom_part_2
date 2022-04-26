@@ -14,7 +14,7 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static stellarburgers.common.ConstantsForTests.CREATE_USER_UNIQUE_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
-public class UserCreatingUniqueValidationTest extends CommonTest implements SetUp, TearDown {
+public class UserCreateUniqueValidationTest extends CommonTest implements SetUp, TearDown {
 
     @Override
     @Before

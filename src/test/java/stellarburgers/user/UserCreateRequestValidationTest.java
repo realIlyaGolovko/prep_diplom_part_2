@@ -14,10 +14,9 @@ import static stellarburgers.common.ConstantsForTests.CREATE_USER_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
 @RunWith(Parameterized.class)
-public class UserCreatingRequestValidationTest extends CommonTest {
-
+public class UserCreateRequestValidationTest extends CommonTest {
  private static final User newUser=User.getRandomUser();
-    public UserCreatingRequestValidationTest(User newUser) {
+    public UserCreateRequestValidationTest(User newUser) {
         this.user = newUser;
     }
 
