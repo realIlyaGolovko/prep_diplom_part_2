@@ -1,4 +1,5 @@
 package stellarburgers.common;
 
-public interface SetUp { void CreateUser();
+public interface SetUp {
+    void CreateUser();
 }

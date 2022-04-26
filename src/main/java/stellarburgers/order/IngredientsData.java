@@ -1,22 +1,24 @@
 package stellarburgers.order;
 
 import lombok.Data;
+
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
-//класс для формирования списка ингредиентов
 public class IngredientsData {
-private boolean success;
-private List<Ingredient> data;
+    private boolean success;
+    private ArrayList<Ingredient> data;
 
-public IngredientsData (){}
-
-public List<String> getIngredientsId(){
-    ArrayList<String> resultId= new ArrayList<>();
-    for (Ingredient datum : data) {
-        resultId.add(datum.get_id());
+    public IngredientsData() {
     }
- return resultId;
-}
+
+    //метод для получения только ID ингредиентов
+    public ArrayList<String> getIngredientsId() {
+        ArrayList<String> resultListId = new ArrayList<>();
+        for (Ingredient datum : data) {
+            resultListId.add(datum.get_id());
+        }
+        return resultListId;
+    }
+
 }

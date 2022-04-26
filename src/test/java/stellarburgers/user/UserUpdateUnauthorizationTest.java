@@ -13,13 +13,13 @@ import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 import static stellarburgers.common.ConstantsForTests.UPDATE_USER_ERROR_MSG;
 
 public class UserUpdateUnauthorizationTest extends CommonTest implements SetUp, TearDown {
-    //создали еще одного пользователя
+    //инициализоровали  еще одного пользователя
  private static final User newUser = User.getRandomUser();
 
     @Override
     @Before
     public void CreateUser() {
-        // выполнили запрос на создание нового пользователя
+        // выполнили запрос на создание  пользователя
 ValidatableResponse createResponse= userClient.create(user);
 token=userClient.getPath(createResponse,"accessToken");
     }

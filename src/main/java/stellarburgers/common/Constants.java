@@ -10,8 +10,10 @@ public class Constants {
     //урл для изменения информации  и удалении инфы о пользователе
     public static final String UPDATE_USER_PATH ="api/auth/user";
 
-    //получение данных об ингредиентах
-    public static final String GET_INGREDIENTS_PATH= "api/ingredients";
-    //создание заказа
+    //урл для получения данных об ингредиентах
+    public static final String GET_INGREDIENTS_PATH = "api/ingredients";
+    //урл для создания заказа
     public static final String CREATE_ORDER_PATH="api/orders";
+    //урл для получения заказов конкретного пользователя
+    public static final String GET_USER_ORDERS_PATH ="api/orders";
 }

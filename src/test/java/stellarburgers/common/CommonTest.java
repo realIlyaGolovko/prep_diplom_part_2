@@ -6,8 +6,8 @@ import stellarburgers.user.UserCredentials;
 
 //базовый класс для тестов
 public class CommonTest {
-    protected static User user=User.getRandomUser();
-    protected static UserClient userClient=new UserClient();
+    protected  User user = User.getRandomUser();
+    protected  UserClient userClient = new UserClient();
     protected String token;
     protected UserCredentials userCredentials;
 }

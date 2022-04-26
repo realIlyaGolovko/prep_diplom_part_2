@@ -1,4 +1,5 @@
 package stellarburgers.user;
+
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -19,28 +20,28 @@ public class UserCreatingUniqueValidationTest extends CommonTest implements SetU
     @Before
     public void CreateUser() {
         //Создали нового уникального пользователя
-        ValidatableResponse createResponse=userClient.create(user);
-        token=userClient.getPath(createResponse,"accessToken");
+        ValidatableResponse createResponse = userClient.create(user);
+        token = userClient.getPath(createResponse, "accessToken");
     }
 
     @Override
     @After
     public void deleteUser() {
         //удалили тестовые данные
-        userClient.deleteUser(user,token);
+        userClient.deleteUser(user, token);
     }
 
-@Test
-@DisplayName("Проверка невозможности создать пользователя, который уже зарегистрирован")
-    public void NotUniqueUserCannotBeCreated(){
+    @Test
+    @DisplayName("Проверка невозможности создать пользователя, который уже зарегистрирован")
+    public void NotUniqueUserCannotBeCreated() {
 //Делаем запрос на создание неуникального пользователя
-ValidatableResponse validatableResponse=userClient.create(user);
+        ValidatableResponse validatableResponse = userClient.create(user);
 //берем нужные данные
-String actualSuccessMsg=userClient.getPath(validatableResponse,"success");
-String actualMsg=userClient.getPath(validatableResponse,"message");
+        String actualSuccessMsg = userClient.getPath(validatableResponse, "success");
+        String actualMsg = userClient.getPath(validatableResponse, "message");
 //Asserts
-validatableResponse.assertThat().statusCode(SC_FORBIDDEN);
-Assert.assertEquals(SUCCESS_MSG_FALSE,actualSuccessMsg);
-Assert.assertEquals(CREATE_USER_UNIQUE_ERROR_MSG,actualMsg);
-}
+        validatableResponse.assertThat().statusCode(SC_FORBIDDEN);
+        Assert.assertEquals(SUCCESS_MSG_FALSE, actualSuccessMsg);
+        Assert.assertEquals(CREATE_USER_UNIQUE_ERROR_MSG, actualMsg);
+    }
 }
