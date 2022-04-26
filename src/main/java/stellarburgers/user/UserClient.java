@@ -50,10 +50,4 @@ public class UserClient extends CommonRestClient {
                 .delete(UPDATE_USER_PATH)
                 .then().log().all();
     }
-
-    // метод для получения нужной строки из тела
-    //не стал писать отдельный класс для парсера, т.к. не очень большой объем кода
-    public String getPath(ValidatableResponse validatableResponse, String path) {
-        return validatableResponse.extract().jsonPath().getString(path);
-    }
 }

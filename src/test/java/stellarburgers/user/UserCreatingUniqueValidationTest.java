@@ -21,7 +21,7 @@ public class UserCreatingUniqueValidationTest extends CommonTest implements SetU
     public void CreateUser() {
         //Создали нового уникального пользователя
         ValidatableResponse createResponse = userClient.create(user);
-        token = userClient.getPath(createResponse, "accessToken");
+        token = getPath(createResponse, "accessToken");
     }
 
     @Override
@@ -37,8 +37,8 @@ public class UserCreatingUniqueValidationTest extends CommonTest implements SetU
 //Делаем запрос на создание неуникального пользователя
         ValidatableResponse validatableResponse = userClient.create(user);
 //берем нужные данные
-        String actualSuccessMsg = userClient.getPath(validatableResponse, "success");
-        String actualMsg = userClient.getPath(validatableResponse, "message");
+        String actualSuccessMsg = getPath(validatableResponse, "success");
+        String actualMsg = getPath(validatableResponse, "message");
 //Asserts
         validatableResponse.assertThat().statusCode(SC_FORBIDDEN);
         Assert.assertEquals(SUCCESS_MSG_FALSE, actualSuccessMsg);

@@ -19,7 +19,7 @@ public class UserLoginValidationTest extends CommonTest implements SetUp, TearDo
     public void CreateUser() {
         //выполнили запрос на создание клиента
         ValidatableResponse createResponse = userClient.create(user);
-        token = userClient.getPath(createResponse, "accessToken");
+        token = getPath(createResponse, "accessToken");
     }
 
     @Override
@@ -37,8 +37,8 @@ public class UserLoginValidationTest extends CommonTest implements SetUp, TearDo
         //выполняем запрос на авторизацию
         ValidatableResponse loginResponse = userClient.login(userCredentials);
         //берем нужные данные
-        String actualMsgSuccess = userClient.getPath(loginResponse, "success");
-        String actualErrorMsg = userClient.getPath(loginResponse, "message");
+        String actualMsgSuccess = getPath(loginResponse, "success");
+        String actualErrorMsg = getPath(loginResponse, "message");
         //Asserts
         loginResponse.assertThat().statusCode(SC_UNAUTHORIZED);
         Assert.assertEquals("Incorrect creation message ", SUCCESS_MSG_FALSE, actualMsgSuccess);

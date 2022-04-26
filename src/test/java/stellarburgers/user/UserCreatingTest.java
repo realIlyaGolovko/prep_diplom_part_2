@@ -24,10 +24,10 @@ public class UserCreatingTest extends CommonTest implements TearDown {
         //выполнили запрос
         ValidatableResponse createResponse = userClient.create(user);
         //взяли нужны данные
-        String actualMsgSuccess = userClient.getPath(createResponse, "success");
-        String actualEmail = userClient.getPath(createResponse, "user.email");
-        String actualName = userClient.getPath(createResponse, "user.name");
-        token = userClient.getPath(createResponse, "accessToken");
+        String actualMsgSuccess = getPath(createResponse, "success");
+        String actualEmail = getPath(createResponse, "user.email");
+        String actualName =getPath(createResponse, "user.name");
+        token = getPath(createResponse, "accessToken");
         //Asserts
         createResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals("Incorrect creation message ", SUCCESS_MSG_TRUE, actualMsgSuccess);

@@ -23,7 +23,7 @@ public class UserUpdateAuthorizationTest extends CommonTest implements SetUp, Te
         ValidatableResponse createResponse = userClient.create(user);
         userCredentials=UserCredentials.from(user);
         ValidatableResponse loginResponse= userClient.login(userCredentials);
-        token = userClient.getPath(loginResponse, "accessToken");
+        token = getPath(loginResponse, "accessToken");
     }
 
     @Override
@@ -39,9 +39,9 @@ public class UserUpdateAuthorizationTest extends CommonTest implements SetUp, Te
         //выполнили запрос на изменение данных
         ValidatableResponse updateResponse = userClient.updateUser(newUser, token);
         //берем нужные данные
-        String actualMsgSuccess = userClient.getPath(updateResponse, "success");
-        String actualEmail = userClient.getPath(updateResponse, "user.email");
-        String actualName = userClient.getPath(updateResponse, "user.name");
+        String actualMsgSuccess = getPath(updateResponse, "success");
+        String actualEmail = getPath(updateResponse, "user.email");
+        String actualName = getPath(updateResponse, "user.name");
 //Asserts
         updateResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals("Incorrect creation message ", SUCCESS_MSG_TRUE, actualMsgSuccess);

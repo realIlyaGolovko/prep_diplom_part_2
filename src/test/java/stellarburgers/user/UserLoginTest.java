@@ -35,11 +35,11 @@ public class UserLoginTest extends CommonTest implements SetUp, TearDown {
     public void UserCanBeLoginWithValidParameters() {
 //выполнили запрос на авторизацию
         ValidatableResponse loginResponse = userClient.login(userCredentials);
-        token = userClient.getPath(loginResponse, "accessToken");
+        token = getPath(loginResponse, "accessToken");
 //берем нужные данные
-        String actualMsgSuccess = userClient.getPath(loginResponse, "success");
-        String actualEmail = userClient.getPath(loginResponse, "user.email");
-        String actualName = userClient.getPath(loginResponse, "user.name");
+        String actualMsgSuccess = getPath(loginResponse, "success");
+        String actualEmail = getPath(loginResponse, "user.email");
+        String actualName = getPath(loginResponse, "user.name");
         //Asserts
         loginResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals("Incorrect creation message ", SUCCESS_MSG_TRUE, actualMsgSuccess);

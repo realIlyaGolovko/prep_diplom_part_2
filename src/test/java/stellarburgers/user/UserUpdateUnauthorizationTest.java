@@ -21,7 +21,7 @@ public class UserUpdateUnauthorizationTest extends CommonTest implements SetUp, 
     public void CreateUser() {
         // выполнили запрос на создание  пользователя
 ValidatableResponse createResponse= userClient.create(user);
-token=userClient.getPath(createResponse,"accessToken");
+token=getPath(createResponse,"accessToken");
     }
 
     @Override
@@ -37,8 +37,8 @@ token=userClient.getPath(createResponse,"accessToken");
         //выполнили запрос на изменение данных без указания токена
         ValidatableResponse updateResponse = userClient.updateUser(newUser, "");
         //берем нужные данные
-        String actualSuccessMsg=userClient.getPath(updateResponse,"success");
-        String actualErrorMsg=userClient.getPath(updateResponse,"message");
+        String actualSuccessMsg=getPath(updateResponse,"success");
+        String actualErrorMsg=getPath(updateResponse,"message");
 //Asserts
         updateResponse.assertThat().statusCode(SC_UNAUTHORIZED);
         Assert.assertEquals(SUCCESS_MSG_FALSE,actualSuccessMsg);

@@ -46,8 +46,8 @@ public class UserCreatingRequestValidationTest extends CommonTest {
         // выполнили запрос на создание пользователя
         ValidatableResponse createResponse = userClient.create(user);
         //взяли нужные данные
-        String actualSuccessMsg = userClient.getPath(createResponse, "success");
-        String actualErrorMsg = userClient.getPath(createResponse, "message");
+        String actualSuccessMsg = getPath(createResponse, "success");
+        String actualErrorMsg = getPath(createResponse, "message");
         //Asserts
         createResponse.assertThat().statusCode(SC_FORBIDDEN);
         Assert.assertEquals("Incorrect success status", SUCCESS_MSG_FALSE, actualSuccessMsg);

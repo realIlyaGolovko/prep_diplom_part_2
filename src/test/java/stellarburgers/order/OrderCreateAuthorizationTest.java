@@ -26,7 +26,7 @@ public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, T
         userCredentials = UserCredentials.from(user);
         //выполнили запрос на авторизацию пользователя
         ValidatableResponse loginResponse = userClient.login(userCredentials);
-        token = userClient.getPath(loginResponse, "accessToken");
+        token = getPath(loginResponse, "accessToken");
     }
 
     @Override
