@@ -1,6 +1,5 @@
 package stellarburgers.order;
 
-
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -15,7 +14,7 @@ import stellarburgers.user.UserCredentials;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, TearDown {
+public class OrderCreateAuthTest extends CommonTest implements SetUp, TearDown {
     private static final OrderClient orderClient = new OrderClient();
     private static final Order order = Order.getRandomOrder();
 
@@ -24,7 +23,7 @@ public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, T
     @Before
     public void CreateUser() {
         //выполнили запрос на создание пользователя
-        ValidatableResponse createResponse = userClient.create(user);
+        userClient.create(user);
         userCredentials = UserCredentials.from(user);
         //выполнили запрос на авторизацию пользователя
         ValidatableResponse loginResponse = userClient.login(userCredentials);
@@ -39,7 +38,7 @@ public class OrderCreateAuthorizationTest extends CommonTest implements SetUp, T
     }
 
     @Test
-    @DisplayName("Проверка возможности создания заказа авторизованным пользователем")
+    @DisplayName("Создание заказа авторизованным пользователем")
     public void OrderСanBeCreatedWithValidParametersAndAuthorization() {
         //выполнили запрос на создание заказа
         ValidatableResponse createOrderResponse = orderClient.createOrder(order, token);

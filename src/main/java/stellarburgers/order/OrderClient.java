@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static stellarburgers.common.Constants.*;
 
 public class OrderClient extends CommonRestClient {
-    @Step("Получение списка всех ингредиентов")
+    @Step("Запрос на получение списка всех ингредиентов")
     public IngredientsData getIngredients() {
         return given().log().all()
                 .spec(getBaseSpec())
@@ -17,7 +17,7 @@ public class OrderClient extends CommonRestClient {
                 .body().as(IngredientsData.class);
     }
 
-    @Step("Запрос на создание заказа c {order}")
+    @Step("Запрос на создание заказа")
     public ValidatableResponse createOrder(Order order, String token) {
         return given().log().all()
                 .spec(getBaseSpec())

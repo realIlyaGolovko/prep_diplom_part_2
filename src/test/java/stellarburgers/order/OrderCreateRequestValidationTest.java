@@ -28,7 +28,7 @@ public class OrderCreateRequestValidationTest extends CommonTest implements SetU
     @Before
     public void CreateUser() {
         //выполнили запрос на создание пользователя
-        ValidatableResponse createResponse = userClient.create(user);
+        userClient.create(user);
         userCredentials = UserCredentials.from(user);
         //выполнили запрос на авторизацию пользователя
         ValidatableResponse loginResponse = userClient.login(userCredentials);
@@ -44,8 +44,9 @@ public class OrderCreateRequestValidationTest extends CommonTest implements SetU
 
 
     @Test
-    @DisplayName("Проверка невозможности создания заказа  с null body")
+    @DisplayName("Ошибка при создании заказа  с null body")
     public void OrderCannotBeCreatedWithoutIngredients() {
+        //инициализировали заказ с null в body
         order = new Order();
         //выполнили запрос на создание заказа
         ValidatableResponse createOrderResponse = orderClient.createOrder(order, token);
@@ -59,8 +60,9 @@ public class OrderCreateRequestValidationTest extends CommonTest implements SetU
     }
 
     @Test
-    @DisplayName("Проверка невозможности создания заказа  с невалидным body")
+    @DisplayName("Ошибка при создании заказа  с невалидным body")
     public void OrderCannotBeCreatedWithIncorrectIngredients() {
+        //инициализировали заказ с неверным хешем
         order = Order.getIncorrectOrder();
         //выполнили запрос на создание заказа
         ValidatableResponse createOrderResponse = orderClient.createOrder(order, token);

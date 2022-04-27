@@ -14,7 +14,7 @@ import stellarburgers.user.UserCredentials;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class OrderCreateUnauthorizationTest extends CommonTest implements SetUp, TearDown {
+public class OrderCreateUnAuthTest extends CommonTest implements SetUp, TearDown {
     private static final OrderClient orderClient = new OrderClient();
     private static final Order order = Order.getRandomOrder();
 
@@ -23,7 +23,7 @@ public class OrderCreateUnauthorizationTest extends CommonTest implements SetUp,
     @Before
     public void CreateUser() {
         //выполнили запрос на создание пользователя
-        ValidatableResponse createResponse = userClient.create(user);
+        userClient.create(user);
         userCredentials = UserCredentials.from(user);
         //выполнили запрос на авторизацию пользователя
         ValidatableResponse loginResponse = userClient.login(userCredentials);
@@ -36,14 +36,14 @@ public class OrderCreateUnauthorizationTest extends CommonTest implements SetUp,
     public void deleteUser() {
         userClient.deleteUser(user, token);
     }
+
     @Test
-    @DisplayName("Проверка возможности создания заказа неавторизованным пользователем")
+    @DisplayName("Cоздание заказа под неавторизованным пользователем")
     public void OrderСanBeCreatedWithValidParametersAndWithoutAuthorization() {
         //выполнили запрос на создание заказа
         ValidatableResponse createOrderResponse = orderClient.createOrder(order, "");
         //взяли нужные тестовые данные
         String actualSuccessMsg = getPath(createOrderResponse, "success");
-
         //Asserts
         createOrderResponse.assertThat().statusCode(SC_OK);
         Assert.assertEquals(SUCCESS_MSG_TRUE, actualSuccessMsg);

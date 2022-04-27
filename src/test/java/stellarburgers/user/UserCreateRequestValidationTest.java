@@ -15,7 +15,8 @@ import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
 @RunWith(Parameterized.class)
 public class UserCreateRequestValidationTest extends CommonTest {
- private static final User newUser=User.getRandomUser();
+    private static final User newUser = User.getRandomUser();
+
     public UserCreateRequestValidationTest(User newUser) {
         this.user = newUser;
     }
@@ -40,7 +41,7 @@ public class UserCreateRequestValidationTest extends CommonTest {
     }
 
     @Test
-    @DisplayName("Проверка невозможности создания пользователя без одного из обязательных полей")
+    @DisplayName("Ошибка при создании пользователя без одного из обязательных полей")
     public void userCannotBeCreatedWithIncompleteData() {
         // выполнили запрос на создание пользователя
         ValidatableResponse createResponse = userClient.create(user);

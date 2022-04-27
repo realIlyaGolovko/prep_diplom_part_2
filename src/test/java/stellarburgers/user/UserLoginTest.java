@@ -19,7 +19,7 @@ public class UserLoginTest extends CommonTest implements SetUp, TearDown {
     @Before
     public void CreateUser() {
 // выполнили запрос на создание клиента
-        ValidatableResponse createResponse = userClient.create(user);
+        userClient.create(user);
         userCredentials = UserCredentials.from(user);
     }
 
@@ -31,7 +31,7 @@ public class UserLoginTest extends CommonTest implements SetUp, TearDown {
     }
 
     @Test
-    @DisplayName("Проверка авторизации под созданным клиентом")
+    @DisplayName("Авторизации под созданным клиентом")
     public void UserCanBeLoginWithValidParameters() {
 //выполнили запрос на авторизацию
         ValidatableResponse loginResponse = userClient.login(userCredentials);

@@ -23,7 +23,7 @@ public class User {
         this.name = name;
     }
 
-    @Step("Создание нового пользователя с рандомными данными")
+    @Step("Инициализировали нового пользователя с рандомными данными")
     public static User getRandomUser() {
         String email = faker.internet().emailAddress();
         Allure.addAttachment("email", email);

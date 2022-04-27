@@ -30,7 +30,7 @@ public class UserLoginValidationTest extends CommonTest implements SetUp, TearDo
     }
 
     @Test
-    @DisplayName("Проверка валдиации при авторизации под клиентом с неверным логином и паролем")
+    @DisplayName("Ошибка при авторизации под клиентом с неверным логином и паролем")
     public void UserCannotBeLoginWithInvalidParameters() {
         //создаем невалидные данные по клиенту
         userCredentials = new UserCredentials(user.getEmail() + "q", user.getPassword() + "w");

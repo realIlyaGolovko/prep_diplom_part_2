@@ -13,14 +13,14 @@ import stellarburgers.common.TearDown;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.*;
 
-public class UserUpdateAuthorizationTest extends CommonTest implements SetUp, TearDown {
+public class UserUpdateAuthTest extends CommonTest implements SetUp, TearDown {
     //инициализировали еще одного пользователя
     private static final User newUser = User.getRandomUser();
 
     @Override
     @Before
     public void CreateUser() {
-        ValidatableResponse createResponse = userClient.create(user);
+        userClient.create(user);
         userCredentials=UserCredentials.from(user);
         ValidatableResponse loginResponse= userClient.login(userCredentials);
         token = getPath(loginResponse, "accessToken");
@@ -34,8 +34,8 @@ public class UserUpdateAuthorizationTest extends CommonTest implements SetUp, Te
     }
 
     @Test
-    @DisplayName("Проверка валдиации при попытке изменить данные под авторизированным пользователем")
-    public void UserAuthorizationCannotBeUpdated() {
+    @DisplayName("Изменение данных под авторизированным пользователем")
+    public void UserAuthCanBeUpdated() {
         //выполнили запрос на изменение данных
         ValidatableResponse updateResponse = userClient.updateUser(newUser, token);
         //берем нужные данные

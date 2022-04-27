@@ -12,7 +12,7 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 import static stellarburgers.common.ConstantsForTests.AUTHORIZATION_USER_ERROR_MSG;
 
-public class UserUpdateUnauthorizationTest extends CommonTest implements SetUp, TearDown {
+public class UserUpdateUnAuthTest extends CommonTest implements SetUp, TearDown {
     //инициализоровали  еще одного пользователя
  private static final User newUser = User.getRandomUser();
 
@@ -32,8 +32,8 @@ token=getPath(createResponse,"accessToken");
     }
 
     @Test
-    @DisplayName("Проверка валдиации при попытке изменить данные под неавторизированным пользователем")
-    public void UserUnauthorizationCannotBeUpdated() {
+    @DisplayName("Ошибка при попытке изменить данные под неавторизированным пользователем")
+    public void UserUnAuthCannotBeUpdated() {
         //выполнили запрос на изменение данных без указания токена
         ValidatableResponse updateResponse = userClient.updateUser(newUser, "");
         //берем нужные данные

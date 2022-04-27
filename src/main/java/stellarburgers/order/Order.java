@@ -41,12 +41,12 @@ public class Order {
         }
         return new Order(resultId);
     }
-
+    @Step("Сформировли невалидный заказ")
     public static Order getIncorrectOrder() {
         //создали список для хранения итогово результата
         ArrayList<String> resultId = new ArrayList<>();
         for (int i = 0; i < quantityOfIngredients; i++) {
-            resultId.add(ingredientsId.get(i)+"x");
+            resultId.add(ingredientsId.get(i) + "x");
         }
         return new Order(resultId);
     }

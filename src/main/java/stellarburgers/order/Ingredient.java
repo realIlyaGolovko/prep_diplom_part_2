@@ -20,8 +20,4 @@ public class Ingredient {
 
     public Ingredient() {
     }
-
-    public String getIdIngredient() {
-        return _id;
-    }
 }

@@ -19,7 +19,7 @@ public class UserCreateUniqueValidationTest extends CommonTest implements SetUp,
     @Override
     @Before
     public void CreateUser() {
-        //Создали нового уникального пользователя
+        //создали нового уникального пользователя
         ValidatableResponse createResponse = userClient.create(user);
         token = getPath(createResponse, "accessToken");
     }
@@ -32,11 +32,11 @@ public class UserCreateUniqueValidationTest extends CommonTest implements SetUp,
     }
 
     @Test
-    @DisplayName("Проверка невозможности создать пользователя, который уже зарегистрирован")
+    @DisplayName("Ошибка при попытке создать пользователя, который уже зарегистрирован")
     public void NotUniqueUserCannotBeCreated() {
-//Делаем запрос на создание неуникального пользователя
+//сделали запрос на создание неуникального пользователя
         ValidatableResponse validatableResponse = userClient.create(user);
-//берем нужные данные
+//взяли  нужные данные
         String actualSuccessMsg = getPath(validatableResponse, "success");
         String actualMsg = getPath(validatableResponse, "message");
 //Asserts
