@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.common.CommonTest;
+import stellarburgers.common.CommonForOrderTests;
 import stellarburgers.common.SetUp;
 import stellarburgers.common.TearDown;
 import stellarburgers.user.UserCredentials;
@@ -14,11 +14,7 @@ import stellarburgers.user.UserCredentials;
 import static org.apache.http.HttpStatus.SC_OK;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_TRUE;
 
-public class OrderCreateUnAuthTest extends CommonTest implements SetUp, TearDown {
-    private static final OrderClient orderClient = new OrderClient();
-    private static final Order order = Order.getRandomOrder();
-
-
+public class OrderCreateUnAuthTest extends CommonForOrderTests implements SetUp, TearDown {
     @Override
     @Before
     public void CreateUser() {

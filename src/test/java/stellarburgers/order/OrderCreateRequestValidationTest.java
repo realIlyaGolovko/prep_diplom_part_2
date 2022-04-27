@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.common.CommonTest;
+import stellarburgers.common.CommonForOrderTests;
 import stellarburgers.common.SetUp;
 import stellarburgers.common.TearDown;
 import stellarburgers.user.UserCredentials;
@@ -20,9 +20,7 @@ import static stellarburgers.common.ConstantsForTests.CREATE_ORDER_ERROR_MSG;
 import static stellarburgers.common.ConstantsForTests.SUCCESS_MSG_FALSE;
 
 
-public class OrderCreateRequestValidationTest extends CommonTest implements SetUp, TearDown {
-    private static final OrderClient orderClient = new OrderClient();
-    private Order order;
+public class OrderCreateRequestValidationTest extends CommonForOrderTests implements SetUp, TearDown {
 
     @Override
     @Before

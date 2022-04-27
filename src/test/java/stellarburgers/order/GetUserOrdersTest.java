@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.common.CommonTest;
+import stellarburgers.common.CommonForOrderTests;
 import stellarburgers.common.SetUp;
 import stellarburgers.common.TearDown;
 import stellarburgers.user.UserCredentials;
@@ -15,9 +15,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static stellarburgers.common.ConstantsForTests.*;
 
-public class GetUserOrdersTest extends CommonTest implements SetUp, TearDown {
-    private static final OrderClient orderClient = new OrderClient();
-    private static final Order order = Order.getRandomOrder();
+public class GetUserOrdersTest extends CommonForOrderTests implements SetUp, TearDown {
+
 
     @Override
     @Before

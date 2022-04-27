@@ -31,7 +31,7 @@ public class Order {
         this.ingredients = ingredients;
     }
 
-    @Step("Сформировли заказ со случайными ингредиентами")
+    @Step("Инициализировали заказ со случайными ингредиентами")
     public static Order getRandomOrder() {
         //создали список для хранения итогово результата
         ArrayList<String> resultId = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Order {
         }
         return new Order(resultId);
     }
-    @Step("Сформировли невалидный заказ")
+    @Step("Инициализировали невалидный заказ")
     public static Order getIncorrectOrder() {
         //создали список для хранения итогово результата
         ArrayList<String> resultId = new ArrayList<>();
